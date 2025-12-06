@@ -9,12 +9,15 @@ environment:
 
 dependencies:
   bloc: ^9.0.1
+  equatable: ^2.0.7
+  file: ^7.0.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
   flutter_localizations:
     sdk: flutter
   intl: ^0.20.2
+  path_provider: ^2.1.5
 
 dev_dependencies:
   bloc_test: ^10.0.0
