@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:fav_coffee/features/coffee/data/data.dart';
 import 'package:fav_coffee/features/coffee/domain/domain.dart';
+import 'package:fav_coffee/features/coffee/presentation/presentation.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:flutter/widgets.dart';
@@ -61,5 +62,10 @@ void _registerDependencies() => GetIt.instance
     CoffeeRepository(
       remoteDataSource: GetIt.instance<CoffeeRemoteDataSource>(),
       localDataSource: GetIt.instance<CoffeeLocalDataSource>(),
+    ),
+  )
+  ..registerFactory<RandomCoffeeCubit>(
+    () => RandomCoffeeCubit(
+      coffeeRepository: GetIt.instance<CoffeeRepository>(),
     ),
   );
