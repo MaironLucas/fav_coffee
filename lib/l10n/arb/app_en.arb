@@ -1,7 +1,19 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "randomImageErrorText": "Error loading image, please try again.",
+    "@randomImageErrorText": {
+        "description": "Text displayed when there is an error loading a random image"
+    },
+    "randomImageGoToFavoriteText": "Go to favorites",
+    "@randomImageGoToFavoriteText": {
+        "description": "Text for the button to go to the favorites screen"
+    },
+    "tryAgainButtonText": "Try Again",
+    "@tryAgainButtonText": {
+        "description": "Text for the try again button"
+    },
+    "saveImageErrorText": "Error saving image",
+    "@saveImageErrorText": {
+        "description": "Text displayed when there is an error saving an image"
     }
 }

@@ -1,0 +1,19 @@
+{
+    "@@locale": "pt",
+    "randomImageErrorText": "Erro ao carregar imagem, tente novamente.",
+    "@randomImageErrorText": {
+        "description": "Texto exibido quando há um erro ao carregar uma imagem aleatória"
+    },
+    "randomImageGoToFavoriteText": "Ir para favoritos",
+    "@randomImageGoToFavoriteText": {
+        "description": "Texto do botão para ir para a tela de favoritos"
+    },
+    "tryAgainButtonText": "Tentar novamente",
+    "@tryAgainButtonText": {
+        "description": "Texto do botão de tentar novamente"
+    },
+    "saveImageErrorText": "Erro ao salvar imagem",
+    "@saveImageErrorText": {
+        "description": "Texto exibido quando há um erro ao salvar uma imagem"
+    }
+}
