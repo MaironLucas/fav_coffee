@@ -19,5 +19,17 @@
     "memoryImageErrorText": "Erro ao carregar imagem",
     "@memoryImageErrorText": {
         "description": "Texto exibido quando há um erro ao carregar uma imagem da memória"
+    },
+    "favoriteCoffeePageTitle": "Cafés Favoritos",
+    "@favoriteCoffeePageTitle": {
+        "description": "Título da página de cafés favoritos"
+    },
+    "favoriteCoffeePageEmptyText": "Nenhum café favorito adicionado ainda.",
+    "@favoriteCoffeePageEmptyText": {
+        "description": "Texto exibido quando não há cafés favoritos"
+    },
+    "favoriteCoffeePageErrorText": "Erro ao carregar cafés favoritos.",
+    "@favoriteCoffeePageErrorText": {
+        "description": "Texto exibido quando há um erro ao carregar cafés favoritos"
     }
 }

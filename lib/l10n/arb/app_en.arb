@@ -19,5 +19,17 @@
     "memoryImageErrorText": "Error loading image",
     "@memoryImageErrorText": {
         "description": "Text displayed when there is an error loading an image from memory"
+    },
+    "favoriteCoffeePageTitle": "Favorite Coffees",
+    "@favoriteCoffeePageTitle": {
+        "description": "Title of the favorite coffees page"
+    },
+    "favoriteCoffeePageEmptyText": "No favorite coffee added yet.",
+    "@favoriteCoffeePageEmptyText": {
+        "description": "Text displayed when there are no favorite coffees"
+    },
+    "favoriteCoffeePageErrorText": "Error loading favorite coffees.",
+    "@favoriteCoffeePageErrorText": {
+        "description": "Text displayed when there is an error loading favorite coffees"
     }
 }

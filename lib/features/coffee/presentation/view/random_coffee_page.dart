@@ -15,7 +15,11 @@ class RandomCoffeePage extends StatelessWidget {
         return GetIt.instance.get<RandomCoffeeCubit>()..initialize();
       },
       child: _RandomCoffeeView(
-        () {},
+        () => Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => const FavoriteCoffeePage(),
+          ),
+        ),
       ),
     );
   }

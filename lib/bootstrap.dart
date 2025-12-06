@@ -68,4 +68,9 @@ void _registerDependencies() => GetIt.instance
     () => RandomCoffeeCubit(
       coffeeRepository: GetIt.instance<CoffeeRepository>(),
     ),
+  )
+  ..registerFactory<FavoriteCoffeeCubit>(
+    () => FavoriteCoffeeCubit(
+      coffeeRepository: GetIt.instance<CoffeeRepository>(),
+    ),
   );
