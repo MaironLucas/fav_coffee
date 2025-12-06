@@ -15,5 +15,9 @@
     "saveImageErrorText": "Erro ao salvar imagem",
     "@saveImageErrorText": {
         "description": "Texto exibido quando há um erro ao salvar uma imagem"
+    },
+    "memoryImageErrorText": "Erro ao carregar imagem",
+    "@memoryImageErrorText": {
+        "description": "Texto exibido quando há um erro ao carregar uma imagem da memória"
     }
 }
