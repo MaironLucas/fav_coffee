@@ -1,0 +1,1 @@
+class UnableToGetRandomImageException implements Exception {}
