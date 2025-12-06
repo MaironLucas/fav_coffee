@@ -17,7 +17,13 @@ class FavoriteCoffeePage extends StatelessWidget {
         return GetIt.instance.get<FavoriteCoffeeCubit>()..initialize();
       },
       child: _FavoriteCoffeeView(
-        (coffeeImage) => {},
+        (coffeeImage) => Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => FavoriteCoffeeDetailsPage(
+              coffeeImage: coffeeImage,
+            ),
+          ),
+        ),
       ),
     );
   }
