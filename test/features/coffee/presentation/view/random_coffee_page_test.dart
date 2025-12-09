@@ -1,5 +1,6 @@
 import 'package:fav_coffee/features/coffee/domain/models/models.dart';
 import 'package:fav_coffee/features/coffee/presentation/presentation.dart';
+import 'package:fav_coffee/l10n/gen/app_localizations_en.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +9,8 @@ import 'package:mocktail/mocktail.dart';
 import '../../../../helpers/helpers.dart';
 
 class MockRandomCoffeeCubit extends Mock implements RandomCoffeeCubit {}
+
+class MockFavoriteCoffeeCubit extends Mock implements FavoriteCoffeeCubit {}
 
 void main() {
   group('RandomCoffeePage', () {
@@ -85,14 +88,17 @@ void main() {
       ]),
     );
     late RandomCoffeeCubit randomCoffeeCubit;
+    late FavoriteCoffeeCubit favoriteCoffeeCubit;
 
     setUp(() {
       randomCoffeeCubit = MockRandomCoffeeCubit();
+      favoriteCoffeeCubit = MockFavoriteCoffeeCubit();
 
       when(randomCoffeeCubit.close).thenAnswer((_) async {});
 
       registerFakeDependencies(
         randomCoffeeCubit: randomCoffeeCubit,
+        favoriteCoffeeCubit: favoriteCoffeeCubit,
       );
     });
 
@@ -125,6 +131,23 @@ void main() {
       await tester.pumpAppPage(const RandomCoffeePage());
 
       expect(find.byType(RandomCoffeeImageCardWidget), findsOneWidget);
+    });
+
+    testWidgets('getRandomImage is called when retry is tapped on error', (
+      WidgetTester tester,
+    ) async {
+      mockState(ErrorRandomCoffeeState());
+      when(() => randomCoffeeCubit.getRandomImage()).thenAnswer((_) async {});
+
+      await tester.pumpAppPage(const RandomCoffeePage());
+
+      final retryButtonFinder = find.text(
+        AppLocalizationsEn().tryAgainButtonText,
+      );
+
+      await tester.tap(retryButtonFinder);
+
+      verify(() => randomCoffeeCubit.getRandomImage()).called(1);
     });
 
     testWidgets('calls getRandomImage when dislike button is tapped', (
@@ -180,5 +203,36 @@ void main() {
 
       expect(actionButtonsWidget.isEnabled, isFalse);
     });
+
+    testWidgets(
+      'navigates to FavoriteCoffeePage when "Go to Favorite" is tapped',
+      (
+        WidgetTester tester,
+      ) async {
+        mockState(SuccessRandomCoffeeState(coffeeImage: fakeCoffeeImage));
+
+        when(() => favoriteCoffeeCubit.close()).thenAnswer((_) async {});
+        when(() => favoriteCoffeeCubit.initialize()).thenAnswer((_) async {});
+        when(() => favoriteCoffeeCubit.stream).thenAnswer(
+          (_) => Stream.value(SuccessFavoriteCoffeeState(favoriteImages: [])),
+        );
+        when(() => favoriteCoffeeCubit.state).thenAnswer(
+          (_) => SuccessFavoriteCoffeeState(favoriteImages: []),
+        );
+
+        await tester.pumpAppPage(const RandomCoffeePage());
+
+        final goToFavoritesFinder = find.text(
+          AppLocalizationsEn().randomImageGoToFavoriteText,
+        );
+        await tester.tap(goToFavoritesFinder);
+
+        await tester.pumpAndSettle();
+
+        expect(find.byType(FavoriteCoffeePage), findsOneWidget);
+
+        verify(() => favoriteCoffeeCubit.initialize()).called(1);
+      },
+    );
   });
 }

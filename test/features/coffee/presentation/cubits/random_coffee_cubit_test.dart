@@ -126,5 +126,21 @@ void main() {
         expect: () => <void>[],
       );
     });
+
+    group('initialize', () {
+      blocTest<RandomCoffeeCubit, RandomCoffeeState>(
+        'calls getRandomImages when initialize is called',
+        build: () => randomCoffeeCubit,
+        setUp: () {
+          when(() => coffeeRepository.getRandomImage()).thenAnswer(
+            (_) async => fakeCoffeeImage,
+          );
+        },
+        act: (cubit) => cubit.initialize(),
+        verify: (cubit) => verify(
+          () => coffeeRepository.getRandomImage(),
+        ).called(1),
+      );
+    });
   });
 }

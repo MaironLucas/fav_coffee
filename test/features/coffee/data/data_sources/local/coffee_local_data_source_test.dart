@@ -7,14 +7,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   final fakeImageBytes = Uint8List.fromList([0, 1, 2, 3, 4, 5]);
+  const mockPath = '/test/documents';
 
   late CoffeeLocalDataSource dataSource;
   late MemoryFileSystem memoryFileSystem;
 
   setUp(() async {
     memoryFileSystem = MemoryFileSystem();
-
-    const mockPath = '/test/documents';
 
     await memoryFileSystem.directory(mockPath).create(recursive: true);
 
@@ -39,19 +38,26 @@ void main() {
     expect(await file.readAsBytes(), fakeImageBytes);
   });
 
-  test('getImage should return null if file does not exist', () async {
-    final result = await dataSource.getImage('non_existent');
+  group('getImage', () {
+    test('should return null if file does not exist', () async {
+      final result = await dataSource.getImage('non_existent');
 
-    expect(result, null);
+      expect(result, null);
+    });
+
+    test('should return CoffeeImageLocal if file exists', () async {
+      await memoryFileSystem.file('$mockPath/pic1.png').writeAsBytes([10]);
+
+      final result = await dataSource.getImage('pic1');
+
+      expect(result, isA<CoffeeImageLocal>());
+    });
   });
 
   test('getAllImages should return list of saved images', () async {
-    final dir = memoryFileSystem.directory('/test/documents');
-    await dir.create(recursive: true);
-
-    await memoryFileSystem.file('${dir.path}/pic1.png').writeAsBytes([10]);
-    await memoryFileSystem.file('${dir.path}/pic2.png').writeAsBytes([20]);
-    await memoryFileSystem.file('${dir.path}/not_image.txt').writeAsBytes([30]);
+    await memoryFileSystem.file('$mockPath/pic1.png').writeAsBytes([10]);
+    await memoryFileSystem.file('$mockPath/pic2.png').writeAsBytes([20]);
+    await memoryFileSystem.file('$mockPath/not_image.txt').writeAsBytes([30]);
 
     final result = await dataSource.getAllImages();
 
